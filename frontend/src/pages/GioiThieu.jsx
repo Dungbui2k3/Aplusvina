@@ -12,7 +12,7 @@ export default function GioiThieu() {
 
       <main className="flex-grow">
         {/* 1. TOP BANNER PAGE */}
-        <section 
+        <section
           className="relative h-[280px] bg-cover bg-center flex items-center justify-center text-white"
           style={{ backgroundImage: `url('${introPageData.bannerImg}')` }}
         >
@@ -27,10 +27,12 @@ export default function GioiThieu() {
           {/* Cụm ảnh kép bo góc xếp chồng bên trái */}
           <div className="lg:col-span-5 relative min-h-[480px] w-full hidden sm:flex justify-center">
             <div className="absolute top-0 left-4 w-[75%] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-xl border border-gray-100 z-10">
-              <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=500" alt="Không gian 1" className="w-full h-full object-cover" />
+              {/* Sửa lại đường dẫn ảnh local tại đây */}
+              <img src="/ảnh web vina/ảnh giới thiệu/giới thiệu 2.jpg" alt="Không gian Aplus 1" className="w-full h-full object-cover" />
             </div>
             <div className="absolute bottom-0 right-4 w-[75%] aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white z-20 translate-y-4">
-              <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" alt="Không gian 2" className="w-full h-full object-cover" />
+              {/* Sửa lại đường dẫn ảnh local tại đây */}
+              <img src="/ảnh web vina/ảnh giới thiệu/giới thiệu 3.jpg" alt="Không gian Aplus 2" className="w-full h-full object-cover" />
             </div>
           </div>
 
@@ -38,7 +40,7 @@ export default function GioiThieu() {
           <div className="lg:col-span-7 space-y-6">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block">GIỚI THIỆU</span>
             <h2 className="text-3xl lg:text-4xl font-black text-red-600 tracking-wide uppercase">APLUS GROUP</h2>
-            
+
             <div className="text-gray-600 text-sm leading-relaxed space-y-4 text-justify">
               <p>
                 <strong>APLUS GROUP</strong> là thương hiệu nội thất cao cấp theo đuổi tiêu chuẩn cao cấp, định hình phong cách sống hiện đại và đẳng cấp. Không chỉ cung cấp sản phẩm, APLUS xây dựng hệ sinh thái toàn diện từ cửa, nội thất, khóa đến bàn bida và thiết bị âm thanh, đảm bảo sự đồng bộ về chất lượng và trải nghiệm.
@@ -88,7 +90,7 @@ export default function GioiThieu() {
           <div className="container mx-auto px-4">
             <span className="text-xs font-bold text-gray-400 font-mono block mb-1">APLUS GROUP/</span>
             <h2 className="text-2xl font-black text-red-600 mb-10 tracking-wide uppercase">DỰ ÁN TIÊU BIỂU</h2>
-            
+
             <div className="relative flex items-center w-full">
               {/* Nút điều hướng mũi tên trái phải */}
               <button className="absolute -left-2 z-10 w-9 h-9 bg-white shadow-md border rounded-full flex items-center justify-center font-bold text-gray-600 hover:bg-red-600 hover:text-white transition-colors cursor-pointer">‹</button>

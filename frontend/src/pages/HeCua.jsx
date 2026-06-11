@@ -8,16 +8,17 @@ export default function HeCua({ type }) {
   // Lựa chọn data fix cứng dựa vào loại cửa truyền xuống từ Router
   let currentData = compositeData;
   let titlePage = "CỬA COMPOSITE";
-  let bannerImg = "https://images.unsplash.com/photo-1534349762230-e0cac37a3e1d?w=1200";
+  // Cập nhật ảnh banner mặc định bằng file local
+  let bannerImg = "/ảnh web vina/ảnh hệ cửa/composite/composite.jpg";
 
   if (type === 'chong-chay') {
     currentData = fireproofData;
     titlePage = "CỬA GỖ CHỐNG CHÁY";
-    bannerImg = "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=1200";
+    bannerImg = "/ảnh web vina/ảnh hệ cửa/chống cháy + công nghiệp/chống cháy.jpg";
   } else if (type === 'nhom-kinh') {
     currentData = aluminumData;
     titlePage = "CỬA NHÔM KÍNH";
-    bannerImg = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200";
+    bannerImg = "/ảnh web vina/ảnh hệ cửa/nhôm kính/nhôm kính.jpg";
   }
 
   return (
