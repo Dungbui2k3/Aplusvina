@@ -46,7 +46,7 @@ export const navigation = {
       link: "/tin-tuc",
       submenu: ["Tin Aplus Group", "Công Ty Thành Viên", "Thông Tin Báo Chí", "Thông Tin Hợp Tác", "Aplus Door"] 
     },
-    { name: "LIÊN HỆ", link: "#" }
+    { name: "LIÊN HỆ", link: "/lien-he" }
   ]
 };
 

@@ -51,7 +51,7 @@ export default function Footer() {
             <li><Link to="/" className="hover:text-white transition-colors block border-b border-gray-900/40 pb-2">Trang chủ</Link></li>
             <li><Link to="/tin-tuc" className="hover:text-white transition-colors block border-b border-gray-900/40 pb-2">Tin tức</Link></li>
             <li><Link to="/gioi-thieu" className="hover:text-white transition-colors block border-b border-gray-900/40 pb-2">Giới thiệu</Link></li>
-            <li><a href="#" className="hover:text-white transition-colors block">Liên hệ</a></li>
+            <li><Link to="/lien-he" className="hover:text-white transition-colors block">Liên hệ</Link></li>
           </ul>
         </div>
 

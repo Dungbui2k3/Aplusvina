@@ -5,6 +5,7 @@ import Homepage from './pages/Homepage'; // Import trang chủ mới của bạn
 import GioiThieu from './pages/GioiThieu';
 import HeCua from './pages/HeCua';
 import TinTuc from './pages/TinTuc';
+import LienHe from './pages/LienHe';
 import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/noi-that-aplus" element={<HeCua type="noi-that" />} />
         <Route path="/khoa-phu-kien" element={<HeCua type="khoa-phu-kien" />} />
         <Route path="/tin-tuc" element={<TinTuc />} />
+        <Route path="/lien-he" element={<LienHe />} />
       </Routes>
     </BrowserRouter>
   );
