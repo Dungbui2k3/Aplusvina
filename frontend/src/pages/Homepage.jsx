@@ -62,28 +62,42 @@ export default function Homepage() {
         </section>
 
         {/* 2. KHỐI GIỚI THIỆU APLUS GROUP (Thiết kế chữ to rõ ràng, bố cục cân xứng) */}
-        <section className="container mx-auto px-4 py-20 grid grid-cols-1 md:grid-cols-12 gap-10 items-center border-b border-gray-200/60">
-          <div className="md:col-span-7 space-y-5">
-            <div className="space-y-1">
-              <span className="text-xs md:text-sm font-bold text-red-600 tracking-[0.25em] uppercase block">
-                {homeIntroData.subtitle}
-              </span>
-              <h2 className="text-2xl md:text-4xl font-black text-gray-900 tracking-wide uppercase">
-                {homeIntroData.title}
-              </h2>
-              <div className="w-12 h-1 bg-red-600 mt-2"></div>
-            </div>
-            <p className="text-gray-600 text-sm md:text-base leading-relaxed text-justify font-medium">
-              {homeIntroData.description}
-            </p>
-            <div className="pt-2">
-              <Link to="/gioi-thieu" className="text-xs md:text-sm font-bold tracking-widest uppercase text-red-600 hover:text-gray-900 transition-colors inline-flex items-center gap-1">
-                Xem chi tiết hành trình của chúng tôi →
-              </Link>
-            </div>
+        <section className="container mx-auto px-4 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center border-b border-gray-200/60">
+          {/* Cụm ảnh bên trái */}
+          <div className="lg:col-span-5 w-full relative aspect-[3/4] overflow-hidden rounded-[2rem] shadow-xl border border-gray-100 bg-gray-50">
+            <img src="/ảnh web vina/ảnh giới thiệu/giới thiệu 1.jpg" alt="Không gian Aplus" className="w-full h-full object-cover" />
+            <img src="/ảnh web vina/logo header.png" alt="Logo APlus" className="absolute top-6 right-6 h-10 w-auto object-contain" />
           </div>
-          <div className="md:col-span-5 w-full aspect-[4/3] overflow-hidden rounded-2xl shadow-md border border-gray-100 bg-gray-50">
-            <img src={homeIntroData.img} alt="Hành trình về Aplus Group" className="w-full h-full object-cover" />
+
+          {/* Nội dung chữ bên phải */}
+          <div className="lg:col-span-7 space-y-6">
+            <span className="text-xs font-bold text-gray-500 uppercase tracking-widest block">GIỚI THIỆU</span>
+            <h2 className="text-4xl lg:text-5xl font-black text-red-600 tracking-wide uppercase">APLUS GROUP</h2>
+
+            <div className="text-gray-600 text-sm md:text-base leading-relaxed space-y-4 text-justify font-medium">
+              <p>
+                <strong>APLUS GROUP</strong> là thương hiệu đa lĩnh vực theo đuổi tiêu chuẩn cao cấp, định hình phong cách sống hiện đại và đẳng cấp. Không chỉ cung cấp sản phẩm, APLUS xây dựng hệ sinh thái toàn diện từ cửa, nội thất, khóa đến bàn bida và thiết bị âm thanh, đảm bảo sự đồng bộ về chất lượng và trải nghiệm.
+              </p>
+              <p>
+                Với triết lý <strong>uy tín – chất lượng – khác biệt</strong>, mỗi sản phẩm của APLUS đều được chọn lọc kỹ lưỡng, chú trọng từ thiết kế đến độ bền và tính ứng dụng thực tế. Chúng tôi tin rằng giá trị thương hiệu được tạo nên từ trải nghiệm khách hàng, vì vậy luôn không ngừng cải tiến để mang đến giải pháp tối ưu và bền vững.
+              </p>
+              <p>
+                Hướng đến vị thế dẫn đầu, APLUS GROUP cam kết đồng hành cùng khách hàng trong việc kiến tạo không gian sống và giải trí đẳng cấp, khác biệt và mang dấu ấn riêng.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4 pt-4">
+              <Link to="/gioi-thieu" className="bg-red-600 text-white text-xs md:text-sm font-bold px-8 py-4 rounded-xl hover:bg-red-700 shadow-md shadow-red-600/10 cursor-pointer uppercase tracking-wider flex items-center justify-center transition-colors">
+                Tư vấn ngay ›
+              </Link>
+              <div className="flex items-center gap-3 border border-gray-200/60 rounded-xl px-5 py-2.5 bg-gray-50/50">
+                <span className="text-red-600 text-base">📞</span>
+                <div>
+                  <span className="text-gray-400 block text-[10px] font-bold tracking-widest uppercase">HOTLINE TƯ VẤN</span>
+                  <a href="tel:+84945389389" className="font-black text-gray-800 hover:text-red-600 text-sm md:text-base tracking-wide">+84.945.389.389</a>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -181,7 +195,8 @@ export default function Homepage() {
         </section>
 
         {/* 5. TIN TỨC & SỰ KIỆN */}
-        <section className="container mx-auto px-4 py-20">
+        
+                 <section className="container mx-auto px-4 max-w-[1360px] py-20">
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-1">
             <span className="text-xs md:text-sm font-bold text-red-600 tracking-widest block">JOURNAL</span>
             <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-wide uppercase">TIN TỨC & SỰ KIỆN</h2>

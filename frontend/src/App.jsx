@@ -5,10 +5,12 @@ import Homepage from './pages/Homepage'; // Import trang chủ mới của bạn
 import GioiThieu from './pages/GioiThieu';
 import HeCua from './pages/HeCua';
 import TinTuc from './pages/TinTuc';
+import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* Đổi view trang chủ cũ sang Component Homepage sạch sẽ */}
         <Route path="/" element={<Homepage />} />

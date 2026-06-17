@@ -59,8 +59,10 @@ export const projects = [
 
 // 5. Tin tức sự kiện
 export const news = [
-  { date: "15", month: "Th6", title: "Xu hướng thiết kế hệ cửa thông minh 2026", desc: "Aplus Group tiên phong ứng dụng công nghệ mới đột phá trong kiến trúc hiện đại...", img: "/ảnh web vina/ảnh trang chủ/tin tức 1.png" },
-  { date: "12", month: "Th6", title: "Khu nghỉ dưỡng Crimson Bay hoàn thiện lắp đặt", desc: "Đảm bảo tiến độ thi công xuất sắc và đạt độ thẩm mỹ vượt trội tối đa...", img: "/ảnh web vina/ảnh trang chủ/tin tức 2.png" }
+  { date: "12", month: "Th4", title: "Khu nghỉ dưỡng crimson bay", desc: "Best windows & doors installation service in the USA. Suspendisse aliquam mi et mi sagittis, [...]", img: "/ảnh web vina/ảnh trang chủ/tin tức 4.png" },
+  { date: "11", month: "Th4", title: "Aplus Group mở rộng hoạt động sang thị trường quốc tế", desc: "This guide offers smart, practical tips to help first-time travelers explore with confidence, stay safe, [...]", img: "/ảnh web vina/ảnh trang chủ/tin tức 2.png" },
+  { date: "19", month: "Th11", title: "Aplus Group hợp tác với đối tác chiến lược Nhật Bản", desc: "This guide offers smart, practical tips to help first-time travelers explore with confidence, stay safe, [...]", img: "/ảnh web vina/ảnh trang chủ/tin tức 1.png" },
+  { date: "13", month: "Th10", title: "Hội nghị xúc tiến đầu tư Aplus Group năm 2024 thành công tốt đẹp", desc: "This guide offers smart, practical tips to help first-time travelers explore with confidence, stay safe, [...]", img: "/ảnh web vina/ảnh trang chủ/tin tức 3.png" }
 ];
 
 export const newsCategories = [
@@ -75,11 +77,41 @@ export const newsKeywords = ["brooklyn", "fashion", "style", "women"];
 
 // 6. Đánh giá từ khách hàng
 export const testimonials = [
-  { name: "Nguyễn Hải Đăng", address: "Hưng Yên", comment: "Rất hài lòng về Aplus, tư vấn thiết kế thi công hoàn thiện tuyệt vời ngoài mong đợi. Đội ngũ chuyên nghiệp và tận tâm.", img: "/ảnh web vina/ảnh trang chủ/khách hàng 1.jpg" },
-  { name: "Nguyễn Gia Thắng", address: "Hà Nam", comment: "Quá tuyệt vời với giải pháp hệ cửa di sản và cao cấp của thương hiệu. Chất lượng sản phẩm vượt kỳ vọng.", img: "/ảnh web vina/ảnh trang chủ/khách hàng 2.jpg" },
-  { name: "Trần Thị Hương", address: "Hà Nội", comment: "Aplus mang đến sự chuyên nghiệp và tận tâm. Không gian nhà tôi thay đổi hoàn toàn sau khi hợp tác với họ.", img: "/ảnh web vina/ảnh trang chủ/khách hàng 1.jpg" },
-  { name: "Lê Văn Minh", address: "Đà Nẵng", comment: "Thi công tuyệt đối, chất lượng hàng đầu. Team Aplus luôn sẵn sàng hỗ trợ và giải đáp mọi thắc mắc của tôi.", img: "/ảnh web vina/ảnh trang chủ/khách hàng 2.jpg" },
-  { name: "Phạm Thu Hà", address: "TP.HCM", comment: "Lựa chọn đúng đắn. Sản phẩm và dịch vụ của Aplus thực sự xứng đáng với giá trị mà họ mang lại.", img: "/ảnh web vina/ảnh trang chủ/khách hàng 1.jpg" }
+  { 
+    name: "Nguyễn Hải Đăng", 
+    address: "Hưng Yên", 
+    comment: "Rất hài lòng về Aplus, tư vấn thiết kế thi công hoàn thiện tuyệt vời ngoài mong đợi. Đội ngũ chuyên nghiệp và tận tâm.", 
+    img: "/ảnh web vina/ảnh trang chủ/khách hàng 1.jpg",
+    projectImg: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 3.png"
+  },
+  { 
+    name: "Nguyễn Gia Thắng", 
+    address: "Hà Nam", 
+    comment: "Thực sự không còn từ gì để mô tả. Quá tuyệt vời về APLUS", 
+    img: "/ảnh web vina/ảnh trang chủ/khách hàng 2.jpg",
+    projectImg: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 4.png"
+  },
+  { 
+    name: "Anh Nguyễn", 
+    address: "Hưng Yên", 
+    comment: "Vợ tôi bảo: Chưa thấy bên nội thất thi công nào lại đẹp sang như Aplus. Căn nhà tiếp theo của chúng tôi sẽ luôn ủng hộ Aplus", 
+    img: "/ảnh web vina/ảnh trang chủ/khách hàng 3.jpg",
+    projectImg: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 5.png"
+  },
+  { 
+    name: "Nguyễn Văn Thắng", 
+    address: "Hồ Chí Minh", 
+    comment: "Bếp quá ưng, vừa hiện đại vừa tiện, nấu ăn mỗi ngày cũng thấy có cảm hứng hơn hẳn", 
+    img: "/ảnh web vina/ảnh trang chủ/khách hàng 4.jpg",
+    projectImg: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 6.png"
+  },
+  { 
+    name: "Phạm Thu Hà", 
+    address: "TP.HCM", 
+    comment: "Lựa chọn đúng đắn. Sản phẩm và dịch vụ của Aplus thực sự xứng đáng với giá trị mà họ mang lại.", 
+    img: "/ảnh web vina/ảnh trang chủ/khách hàng 5.jpg",
+    projectImg: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 7.png"
+  }
 ];
 
 export const compositeData = {
