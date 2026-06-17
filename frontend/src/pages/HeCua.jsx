@@ -1,16 +1,14 @@
 // frontend/src/pages/HeCua.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { compositeData, fireproofData, aluminumData } from '../data/mockData';
 
 export default function HeCua({ type }) {
+  const [currentPage, setCurrentPage] = useState(1);
   const isTopLevelSection = !type || type === 'noi-that' || type === 'khoa-phu-kien';
-  const pageTitle = type === 'noi-that'
-    ? 'NỘI THẤT APLUS'
-    : type === 'khoa-phu-kien'
-      ? 'KHÓA & PHỤ KIỆN APLUS'
-      : 'HỆ CỬA APLUS';
+  const isSpecialOverview = false;
+  const pageTitle = 'HỆ CỬA APLUS';
 
   const pageData = {
     heCua: {
@@ -64,6 +62,10 @@ export default function HeCua({ type }) {
   };
 
   const topLevelData = pageData.heCua;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [type]);
 
   // Trang chính của các mục top-level /he-cua, /noi-that-aplus, /khoa-phu-kien
   if (isTopLevelSection) {
@@ -435,6 +437,17 @@ export default function HeCua({ type }) {
     bannerImg = "/ảnh web vina/ảnh hệ cửa/composite/composite.jpg";
   }
 
+  const productsPerPage = 3;
+  const totalPages = Math.ceil(currentData.products.length / productsPerPage);
+  const safeCurrentPage = Math.min(currentPage, totalPages || 1);
+  const productStartIndex = (safeCurrentPage - 1) * productsPerPage;
+  const visibleProducts = currentData.products.slice(productStartIndex, productStartIndex + productsPerPage);
+  const hasPagination = totalPages > 1;
+
+  const goToProductPage = (pageNumber) => {
+    setCurrentPage(Math.min(Math.max(pageNumber, 1), totalPages));
+  };
+
   return (
     <div className="bg-white text-gray-800 min-h-screen flex flex-col justify-between">
       <Header />
@@ -467,32 +480,64 @@ export default function HeCua({ type }) {
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {currentData.products.map((p, i) => (
-                <div key={i} className="group cursor-pointer space-y-3">
+              {visibleProducts.map((product, productIndex) => (
+                <div key={`${product.title}-${product.code || productIndex}`} className="group cursor-pointer space-y-3">
                   {/* Khung ảnh bo góc sâu chuẩn thiết kế */}
                   <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-50">
                     <img 
-                      src={p.img} 
-                      alt={p.title} 
+                      src={product.img} 
+                      alt={product.title} 
                       className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" 
                     />
                   </div>
                   {/* Tên mã và mô tả màu sắc */}
                   <div className="px-1">
-                    {p.code && <span className="block font-black text-gray-900 text-sm tracking-wide">{p.code}</span>}
-                    <span className="block text-xs font-bold text-gray-500 mt-0.5">{p.title}</span>
+                    {product.code && <span className="block font-black text-gray-900 text-sm tracking-wide">{product.code}</span>}
+                    <span className="block text-xs font-bold text-gray-500 mt-0.5">{product.title}</span>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Pagination Phân trang (Nếu là dòng cửa chống cháy - có 3 trang) */}
-            {type === 'chong-chay' && (
+            {hasPagination && (
               <div className="flex justify-center items-center gap-2 mt-12 text-xs font-black">
-                <span className="w-7 h-7 bg-red-600 text-white rounded-full flex items-center justify-center">1</span>
-                <span className="w-7 h-7 border border-gray-200 text-gray-600 rounded-full flex items-center justify-center hover:border-red-600 hover:text-red-600 cursor-pointer">2</span>
-                <span className="w-7 h-7 border border-gray-200 text-gray-600 rounded-full flex items-center justify-center hover:border-red-600 hover:text-red-600 cursor-pointer">3</span>
-                <span className="w-7 h-7 border border-gray-200 text-gray-600 rounded-full flex items-center justify-center hover:border-red-600 hover:text-red-600 cursor-pointer">›</span>
+                {safeCurrentPage > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => goToProductPage(safeCurrentPage - 1)}
+                    className="w-7 h-7 border border-gray-200 text-gray-600 rounded-full flex items-center justify-center hover:border-red-600 hover:text-red-600 transition-colors"
+                  >
+                    ‹
+                  </button>
+                )}
+                {Array.from({ length: totalPages }, (_, pageIndex) => {
+                  const pageNumber = pageIndex + 1;
+                  const isActivePage = pageNumber === safeCurrentPage;
+
+                  return (
+                    <button
+                      key={pageNumber}
+                      type="button"
+                      onClick={() => goToProductPage(pageNumber)}
+                      className={`w-7 h-7 rounded-full flex items-center justify-center transition-colors ${
+                        isActivePage
+                          ? 'bg-red-600 text-white'
+                          : 'border border-gray-200 text-gray-600 hover:border-red-600 hover:text-red-600'
+                      }`}
+                    >
+                      {pageNumber}
+                    </button>
+                  );
+                })}
+                {safeCurrentPage < totalPages && (
+                  <button
+                    type="button"
+                    onClick={() => goToProductPage(safeCurrentPage + 1)}
+                    className="w-7 h-7 border border-gray-200 text-gray-600 rounded-full flex items-center justify-center hover:border-red-600 hover:text-red-600 transition-colors"
+                  >
+                    ›
+                  </button>
+                )}
               </div>
             )}
           </div>

@@ -13,8 +13,34 @@ export const navigation = {
         { name: "Cửa Nhôm Kính", link: "/he-cua/nhom-kinh" }
       ] 
     },
-    { name: "NỘI THẤT APLUS", link: "/noi-that-aplus" },
-    { name: "KHÓA PHỤ KIỆN", link: "/khoa-phu-kien" },
+    {
+      name: "NỘI THẤT APLUS",
+      link: "/noi-that-aplus",
+      submenu: [
+        { name: "Bộ sưu tập", link: "/noi-that-aplus" },
+        { name: "Phòng khách", link: "/noi-that-aplus" },
+        { name: "Tủ bếp cao cấp", link: "/noi-that-aplus" },
+        { name: "Phòng ngủ", link: "/noi-that-aplus" },
+        { name: "Văn phòng", link: "/noi-that-aplus" },
+        { name: "Trường học", link: "/noi-that-aplus" }
+      ]
+    },
+    {
+      name: "KHÓA PHỤ KIỆN",
+      link: "/khoa-phu-kien",
+      submenu: [
+        { name: "Khóa cửa", link: "/khoa-phu-kien" },
+        { name: "Phụ kiện", link: "/khoa-phu-kien" }
+      ]
+    },
+    {
+      name: "SẢN PHẨM KHÁC",
+      link: "#",
+      submenu: [
+        { name: "Bàn Bida", link: "#" },
+        { name: "Thiết bị âm thanh", link: "#" }
+      ]
+    },
     { 
       name: "TIN TỨC", 
       link: "/tin-tuc",
