@@ -39,9 +39,9 @@ export default function GioiThieu() {
           {/* Nội dung chữ bên phải */}
           <div className="lg:col-span-7 space-y-6">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block">GIỚI THIỆU</span>
-            <h2 className="text-3xl lg:text-4xl font-black text-red-600 tracking-wide uppercase">APLUS GROUP</h2>
+            <h2 className="text-4xl lg:text-5xl font-black text-red-600 tracking-wide uppercase">APLUS GROUP</h2>
 
-            <div className="text-gray-600 text-sm leading-relaxed space-y-4 text-justify">
+            <div className="text-gray-600 text-base lg:text-lg leading-relaxed space-y-4 text-justify">
               <p>
                 <strong>APLUS GROUP</strong> là thương hiệu nội thất cao cấp theo đuổi tiêu chuẩn cao cấp, định hình phong cách sống hiện đại và đẳng cấp. Không chỉ cung cấp sản phẩm, APLUS xây dựng hệ sinh thái toàn diện từ cửa, nội thất, khóa đến bàn bida và thiết bị âm thanh, đảm bảo sự đồng bộ về chất lượng và trải nghiệm.
               </p>
@@ -54,14 +54,14 @@ export default function GioiThieu() {
             </div>
 
             <div className="flex flex-wrap items-center gap-4 pt-4">
-              <button className="bg-red-600 text-white text-xs font-bold px-8 py-4 rounded-xl hover:bg-red-700 shadow-md shadow-red-600/10 cursor-pointer uppercase tracking-wider">
+              <button className="bg-red-600 text-white text-sm md:text-base font-bold px-8 py-4 rounded-xl hover:bg-red-700 shadow-md shadow-red-600/10 cursor-pointer uppercase tracking-wider">
                 Tư vấn ngay ›
               </button>
               <div className="flex items-center gap-3 border border-gray-200/60 rounded-xl px-5 py-2.5 bg-gray-50/50">
                 <span className="text-red-600 text-base">📞</span>
                 <div>
-                  <span className="text-gray-400 block text-[9px] font-bold tracking-widest">HOTLINE TƯ VẤN</span>
-                  <a href="tel:+84945389389" className="font-black text-gray-800 hover:text-red-600 text-sm tracking-wide">+84.945.389.389</a>
+                  <span className="text-gray-400 block text-xs font-bold tracking-widest">HOTLINE TƯ VẤN</span>
+                  <a href="tel:+84945389389" className="font-black text-gray-800 hover:text-red-600 text-base tracking-wide">+84.945.389.389</a>
                 </div>
               </div>
             </div>
@@ -76,8 +76,8 @@ export default function GioiThieu() {
                 <div className="text-3xl mb-1">
                   {i === 0 ? "📋" : i === 1 ? "👁" : "📈"}
                 </div>
-                <h3 className="font-black text-base tracking-widest uppercase">{v.title}</h3>
-                <p className="text-xs text-white/90 leading-relaxed font-medium max-w-sm mx-auto text-justify md:text-center">
+                <h3 className="font-black text-lg md:text-xl tracking-widest uppercase">{v.title}</h3>
+                <p className="text-sm md:text-base text-white/90 leading-relaxed font-medium max-w-sm mx-auto text-justify md:text-center">
                   {v.desc}
                 </p>
               </div>
@@ -89,21 +89,21 @@ export default function GioiThieu() {
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <span className="text-xs font-bold text-gray-400 font-mono block mb-1">APLUS GROUP/</span>
-            <h2 className="text-2xl font-black text-red-600 mb-10 tracking-wide uppercase">DỰ ÁN TIÊU BIỂU</h2>
+            <h2 className="text-3xl lg:text-4xl font-black text-red-600 mb-10 tracking-wide uppercase">DỰ ÁN TIÊU BIỂU</h2>
 
             <div className="relative flex items-center w-full">
               {/* Nút điều hướng mũi tên trái phải */}
               <button className="absolute -left-2 z-10 w-9 h-9 bg-white shadow-md border rounded-full flex items-center justify-center font-bold text-gray-600 hover:bg-red-600 hover:text-white transition-colors cursor-pointer">‹</button>
               <button className="absolute -right-2 z-10 w-9 h-9 bg-white shadow-md border rounded-full flex items-center justify-center font-bold text-gray-600 hover:bg-red-600 hover:text-white transition-colors cursor-pointer">›</button>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full px-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full px-4">
                 {introPageData.featuredProjects.map((p, i) => (
                   <div key={i} className="group rounded-2xl overflow-hidden shadow-md bg-white border border-gray-100 flex flex-col justify-between">
                     <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
                       <img src={p.img} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <div className="p-4 bg-black text-white text-center">
-                      <h4 className="font-black text-xs tracking-wide uppercase line-clamp-1">{p.title}</h4>
+                      <h4 className="font-black text-sm md:text-base tracking-wide uppercase line-clamp-1">{p.title}</h4>
                     </div>
                   </div>
                 ))}

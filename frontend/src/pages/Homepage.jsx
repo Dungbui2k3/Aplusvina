@@ -1,13 +1,14 @@
 // frontend/src/pages/Homepage.jsx
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { sectors, homeSliders, homeProjects, homeTestimonials, homePartners } from '../data/mockData';
+import NhanTuVan from '../components/NhanTuVan';
+import { homeSliders, homeIntroData, sectors, projects, news } from '../data/mockData';
 
 export default function Homepage() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Tự động chạy Slider Banner chính
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % homeSliders.length);
@@ -16,145 +17,211 @@ export default function Homepage() {
   }, []);
 
   return (
-    <div className="bg-white text-gray-800 min-h-screen flex flex-col justify-between">
-      {/* HEADER */}
+    <div className="bg-[#FAF9F6] text-gray-800 min-h-screen font-sans flex flex-col justify-between overflow-x-hidden">
+      
+      {/* --- HEADER --- */}
       <Header />
 
       <main className="flex-grow">
-        {/* 1. HERO SLIDER BANNER */}
-        <section className="relative h-[480px] md:h-[600px] overflow-hidden bg-gray-900 text-white">
+        
+        {/* 1. HERO BANNER SLIDER (Cỡ chữ tiêu đề lớn, thoáng đạt) */}
+        <section className="relative h-[440px] md:h-[540px] overflow-hidden bg-gray-900 text-white">
           {homeSliders.map((slide, idx) => (
             <div
               key={idx}
-              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+              className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out transform ${
+                idx === currentSlide ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-102 z-0'
+              }`}
               style={{ backgroundImage: `url('${slide.img}')` }}
             >
               <div className="absolute inset-0 bg-black/40"></div>
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
-                <h2 className="text-3xl md:text-5xl font-black tracking-widest uppercase mb-4 drop-shadow-md">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+                <span className="text-xs md:text-sm font-bold tracking-[0.3em] text-red-500 mb-3 drop-shadow-sm">
+                  {slide.sub}
+                </span>
+                <h1 className="text-2xl md:text-5xl font-black tracking-widest uppercase max-w-4xl leading-snug drop-shadow-md mb-5">
                   {slide.title}
-                </h2>
-                <p className="text-xs md:text-sm font-bold tracking-widest uppercase text-gray-200 border-b border-white/40 pb-2">
-                  Giải pháp toàn diện về hệ cửa & nội thất cao cấp
-                </p>
+                </h1>
+                <div className="w-16 h-[2px] bg-red-600 mb-6"></div>
+                <Link to="/gioi-thieu" className="text-xs font-bold tracking-widest uppercase border-2 border-white px-7 py-3 hover:bg-red-600 hover:border-red-600 transition-all duration-300">
+                  Khám phá ngay
+                </Link>
               </div>
             </div>
           ))}
           
-          {/* Nút điều hướng Slider */}
           <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center gap-2">
             {homeSliders.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentSlide(idx)}
-                className={`w-3 h-3 rounded-full transition-all ${idx === currentSlide ? 'bg-red-600 w-8' : 'bg-white/50'}`}
+                className={`h-[3px] transition-all duration-500 ${idx === currentSlide ? 'bg-red-600 w-10' : 'bg-white/40 w-4'}`}
               ></button>
             ))}
           </div>
         </section>
 
-        {/* 2. KHỐI LĨNH VỰC HOẠT ĐỘNG (SECTORS) */}
+        {/* 2. KHỐI GIỚI THIỆU APLUS GROUP (Thiết kế chữ to rõ ràng, bố cục cân xứng) */}
+        <section className="container mx-auto px-4 py-20 grid grid-cols-1 md:grid-cols-12 gap-10 items-center border-b border-gray-200/60">
+          <div className="md:col-span-7 space-y-5">
+            <div className="space-y-1">
+              <span className="text-xs md:text-sm font-bold text-red-600 tracking-[0.25em] uppercase block">
+                {homeIntroData.subtitle}
+              </span>
+              <h2 className="text-2xl md:text-4xl font-black text-gray-900 tracking-wide uppercase">
+                {homeIntroData.title}
+              </h2>
+              <div className="w-12 h-1 bg-red-600 mt-2"></div>
+            </div>
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed text-justify font-medium">
+              {homeIntroData.description}
+            </p>
+            <div className="pt-2">
+              <Link to="/gioi-thieu" className="text-xs md:text-sm font-bold tracking-widest uppercase text-red-600 hover:text-gray-900 transition-colors inline-flex items-center gap-1">
+                Xem chi tiết hành trình của chúng tôi →
+              </Link>
+            </div>
+          </div>
+          <div className="md:col-span-5 w-full aspect-[4/3] overflow-hidden rounded-2xl shadow-md border border-gray-100 bg-gray-50">
+            <img src={homeIntroData.img} alt="Hành trình về Aplus Group" className="w-full h-full object-cover" />
+          </div>
+        </section>
+
+        {/* 3. LĨNH VỰC ĐẦU TƯ */}
         <section className="container mx-auto px-4 py-20">
-          <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
-            <span className="text-xs font-bold text-red-600 tracking-widest uppercase">DANH MỤC</span>
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-wide uppercase">LĨNH VỰC HOẠT ĐỘNG</h2>
+          <div className="grid grid-cols-1 xl:grid-cols-[360px_1fr] gap-8">
+            <div className="rounded-[32px] bg-red-700 text-white p-12 flex flex-col justify-between shadow-2xl shadow-red-500/10">
+              <div>
+                <p className="text-sm md:text-base font-semibold uppercase tracking-[0.35em] text-red-200/80">
+                  LĨNH VỰC
+                </p>
+                <h2 className="mt-6 text-5xl md:text-6xl font-black uppercase tracking-tight leading-tight">
+                  ĐẦU TƯ
+                </h2>
+                <p className="mt-4 text-base md:text-lg leading-relaxed text-red-100/90">
+                  APlus Group mang đến giải pháp toàn diện cho hệ cửa, nội thất, khóa phụ kiện, âm thanh cao cấp và thiết kế bida đẳng cấp.
+                </p>
+              </div>
+              <div className="mt-10">
+                <span className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.3em] font-bold text-red-100/80">
+                  Xem toàn bộ lĩnh vực
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 18 6-6-6-6"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-5">
+              {sectors.map((sec) => (
+                <Link key={sec.id} to={sec.link} className="group overflow-hidden rounded-[32px] shadow-2xl border border-gray-200/20 bg-white">
+                  <div className="relative h-[560px] overflow-hidden">
+                    <img src={sec.img} alt={sec.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/70">Lĩnh vực</span>
+                      <h3 className="mt-3 text-lg md:text-xl font-black uppercase tracking-[0.06em] text-white leading-tight whitespace-nowrap overflow-hidden">
+                        {sec.name}
+                      </h3>
+                      <button className="mt-5 rounded-full bg-red-600 px-5 py-2 text-xs md:text-sm font-black uppercase tracking-[0.25em] text-white transition hover:bg-red-700 whitespace-nowrap">
+                        XEM THÊM
+                      </button>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16 bg-zinc-900 text-white border-t border-zinc-800">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+              <div className="space-y-1">
+                <span className="text-sm md:text-base font-bold text-red-500 font-mono tracking-widest block">DỰ ÁN /</span>
+                <h2 className="text-3xl md:text-4xl font-black tracking-wider uppercase">A+PLUS GROUP</h2>
+              </div>
+              <div className="text-xs md:text-sm font-semibold uppercase tracking-[0.28em] text-gray-400 max-w-2xl">
+                TỔ HỢP KHU CHUNG CƯ VĂN PHÒNG / QUẦN THỂ DU LỊCH, NGHỈ DƯỠNG / HÀN KHÔNG / KHU CÔNG NGHIỆP CÔNG NGHỆ CAO
+              </div>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-[1.45fr_1fr]">
+              <div className="rounded-[28px] overflow-hidden bg-white shadow-2xl shadow-black/20">
+                <div className="relative h-[420px] overflow-hidden bg-black">
+                  <img src={projects[0].img} alt={projects[0].title} className="w-full h-full object-contain" />
+                </div>
+                <div className="p-6 bg-zinc-950 border-t border-zinc-800">
+                  <h3 className="text-xl md:text-2xl font-black uppercase tracking-wide text-white">{projects[0].title}</h3>
+                  <button className="mt-5 inline-flex items-center gap-2 rounded-full bg-red-600 px-5 py-3 text-sm md:text-base font-black uppercase tracking-[0.2em] text-white hover:bg-red-700 transition">
+                    XEM THÊM
+                    <span>→</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {projects.slice(1, 5).map((project, idx) => (
+                  <div key={idx} className="group overflow-hidden rounded-[28px] bg-white shadow-xl shadow-black/20 border border-gray-200">
+                    <div className="relative h-48 overflow-hidden bg-black">
+                      <img src={project.img} alt={project.title} className="w-full h-full object-contain" />
+                    </div>
+                    <div className="p-4 bg-zinc-950">
+                      <h4 className="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white leading-tight">{project.title}</h4>
+                      <span className="mt-3 inline-flex items-center gap-1 text-xs md:text-sm font-bold uppercase tracking-[0.25em] text-red-500">
+                        XEM THÊM
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 5. TIN TỨC & SỰ KIỆN */}
+        <section className="container mx-auto px-4 py-20">
+          <div className="text-center max-w-2xl mx-auto mb-14 space-y-1">
+            <span className="text-xs md:text-sm font-bold text-red-600 tracking-widest block">JOURNAL</span>
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-wide uppercase">TIN TỨC & SỰ KIỆN</h2>
             <div className="w-12 h-1 bg-red-600 mx-auto mt-2"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {sectors.map((sec) => (
-              <div key={sec.id} className="group cursor-pointer space-y-4">
-                <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50 relative">
-                  <img 
-                    src={sec.img} 
-                    alt={sec.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                  <div className="absolute bottom-4 left-6 right-6 flex justify-between items-center text-white">
-                    <span className="text-xs font-mono opacity-60 font-bold">{sec.id}/</span>
-                    <h3 className="font-black text-sm tracking-wide uppercase">{sec.name}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {news.map((n, idx) => (
+              <div key={idx} className="flex flex-col sm:flex-row gap-5 bg-white p-3.5 shadow-sm group cursor-pointer border border-gray-100 rounded-2xl hover:shadow-md transition-shadow">
+                <div className="w-full sm:w-5/12 aspect-[4/3] overflow-hidden bg-gray-50 flex-shrink-0 relative rounded-xl">
+                  <img src={n.img} alt={n.title} className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" />
+                </div>
+                <div className="flex flex-col justify-between py-1">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-red-600 uppercase font-mono">
+                      <span>{n.date}</span>
+                      <span className="text-gray-300">/</span>
+                      <span className="text-gray-400">{n.month}</span>
+                    </div>
+                    <h3 className="font-black text-sm md:text-base uppercase text-gray-900 line-clamp-2 tracking-wide group-hover:text-red-600 transition-colors">
+                      {n.title}
+                    </h3>
+                    <p className="text-gray-500 text-xs md:text-sm leading-relaxed line-clamp-2">
+                      {n.desc}
+                    </p>
                   </div>
+                  <span className="text-xs font-bold text-gray-900 uppercase tracking-widest border-b-2 border-gray-900 w-max pt-1 group-hover:text-red-600 group-hover:border-red-600 transition-colors">
+                    Đọc tiếp
+                  </span>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* 3. KHỐI DỰ ÁN TIÊU BIỂU (DỰ ÁN TRANG CHỦ) */}
-        <section className="py-20 bg-gray-50/50 border-t border-b border-gray-100">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
-              <div>
-                <span className="text-xs font-bold text-gray-400 font-mono block mb-1">APLUS GROUP /</span>
-                <h2 className="text-2xl font-black text-red-600 tracking-wide uppercase">DỰ ÁN TIÊU BIỂU</h2>
-              </div>
-              <button className="text-xs font-black border border-red-600 text-red-600 px-5 py-2.5 rounded-xl bg-white hover:bg-red-600 hover:text-white transition-all uppercase tracking-wider cursor-pointer">
-                Xem tất cả dự án ›
-              </button>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {homeProjects.slice(0, 3).map((p, i) => (
-                <div key={i} className="group rounded-2xl overflow-hidden shadow-md bg-white border border-gray-100 flex flex-col justify-between">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
-                    <img src={p.img} alt={p.title} className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" />
-                  </div>
-                  <div className="p-4 bg-gray-900 text-white text-center">
-                    <h4 className="font-black text-xs tracking-wide uppercase line-clamp-1">{p.title}</h4>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 4. KHỐI Ý KIẾN KHÁCH HÀNG & ĐỐI TÁC */}
-        <section className="container mx-auto px-4 py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Đánh giá khách hàng bên trái */}
-            <div className="lg:col-span-7 space-y-8">
-              <h3 className="text-xl font-black text-gray-900 tracking-wide uppercase border-l-4 border-red-600 pl-3">
-                ĐÁNH GIÁ TỪ KHÁCH HÀNG
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {homeTestimonials.slice(0, 2).map((t, idx) => (
-                  <div key={idx} className="p-6 rounded-2xl bg-white border border-gray-100 shadow-sm space-y-4">
-                    <p className="text-gray-600 text-xs leading-relaxed italic text-justify">
-                      "{t.comment}"
-                    </p>
-                    <div className="flex items-center gap-3 pt-2">
-                      <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100 border">
-                        <img src={t.img} alt={t.name} className="w-full h-full object-cover" />
-                      </div>
-                      <div>
-                        <h5 className="font-black text-xs text-gray-900">{t.name}</h5>
-                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{t.address}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Logo đối tác bên phải */}
-            <div className="lg:col-span-5 space-y-6 bg-gray-50 p-8 rounded-2xl border">
-              <h3 className="text-sm font-black text-center text-gray-400 tracking-widest uppercase">
-                ĐỐI TÁC CHIẾN LƯỢC
-              </h3>
-              <div className="grid grid-cols-2 gap-4 items-center">
-                {homePartners.map((partner, idx) => (
-                  <div key={idx} className="bg-white p-4 rounded-xl border border-gray-200/60 shadow-sm flex items-center justify-center h-20 group hover:border-red-600/40 transition-colors">
-                    <img src={partner.img} alt={partner.name} className="max-h-full max-w-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* 6. NHÂN TƯ VẤN */}
+        <NhanTuVan />
       </main>
 
-      {/* FOOTER */}
+      {/* --- FOOTER --- */}
       <Footer />
     </div>
   );
