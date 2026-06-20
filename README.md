@@ -21,7 +21,7 @@ Mở 2 terminal.
 Terminal 1 chạy backend:
 
 ```bash
-npm run dev:backend
+node server.js
 ```
 
 Backend chạy tại:
@@ -33,7 +33,7 @@ http://localhost:5000
 Terminal 2 chạy frontend:
 
 ```bash
-npm run dev:frontend
+npm run dev
 ```
 
 Frontend chạy tại:
