@@ -1,9 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { news, newsCategories, newsKeywords } from '../data/mockData';
+import { useSiteData } from '../context/SiteDataContext';
+import { slugify } from '../utils/slug';
+
+const newsSlugs = [
+  'khu-nghi-duong-crimson-bay',
+  'aplus-group-mo-rong-hoat-dong-sang-thi-truong-quoc-te',
+  'aplus-group-hop-tac-voi-doi-tac-chien-luoc-nhat-ban',
+  'hoi-nghi-xuc-tien-dau-tu-aplus-group-2024',
+];
+
+const getNewsSlug = (item, index) => item.slug || newsSlugs[index] || slugify(item.title);
 
 export default function TinTuc() {
+  const { news = [], newsCategories = [], newsKeywords = [] } = useSiteData();
+
   return (
     <div className="bg-white text-gray-800 min-h-screen flex flex-col justify-between">
       <Header />
@@ -44,9 +57,9 @@ export default function TinTuc() {
                       <h3 className="text-xl font-black text-gray-900 mb-3">{item.title}</h3>
                       <p className="text-sm leading-relaxed text-gray-600">{item.desc}</p>
                     </div>
-                    <button className="mt-6 inline-flex items-center justify-center rounded-full bg-red-600 text-white text-xs font-black uppercase tracking-[0.35em] px-6 py-3 hover:bg-red-700 transition-colors">
+                    <Link to={`/thong-tin-hop-tac/${getNewsSlug(item, idx)}`} className="mt-6 inline-flex items-center justify-center rounded-full bg-red-600 text-white text-xs font-black uppercase tracking-[0.35em] px-6 py-3 hover:bg-red-700 transition-colors">
                       Xem chi tiết
-                    </button>
+                    </Link>
                   </div>
                 </article>
               ))}
@@ -59,7 +72,7 @@ export default function TinTuc() {
               <ul className="space-y-3 text-sm font-bold text-gray-600">
                 {newsCategories.map((item, idx) => (
                   <li key={idx} className="border-b border-gray-100 pb-3 last:border-b-0">
-                    <a href="#" className="hover:text-red-600 transition-colors">{item}</a>
+                    <Link to="/tin-tuc" className="hover:text-red-600 transition-colors">{item}</Link>
                   </li>
                 ))}
               </ul>
@@ -74,7 +87,7 @@ export default function TinTuc() {
                       <img src={item.img} alt={item.title} className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <h5 className="font-black text-sm text-gray-900">{item.title}</h5>
+                      <Link to={`/thong-tin-hop-tac/${getNewsSlug(item, idx)}`} className="font-black text-sm text-gray-900 hover:text-red-600 block">{item.title}</Link>
                       <p className="text-xs text-gray-500">1 bình luận</p>
                     </div>
                   </li>

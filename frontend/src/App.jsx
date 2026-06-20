@@ -5,11 +5,16 @@ import Homepage from './pages/Homepage'; // Import trang chủ mới của bạn
 import GioiThieu from './pages/GioiThieu';
 import HeCua from './pages/HeCua';
 import TinTuc from './pages/TinTuc';
+import ProductDetail from './pages/ProductDetail';
+import NewsDetail from './pages/NewsDetail';
 import LienHe from './pages/LienHe';
+import AdminDashboard from './pages/AdminDashboard';
 import ScrollToTop from './components/ScrollToTop';
+import { SiteDataProvider } from './context/SiteDataContext';
 
 export default function App() {
   return (
+    <SiteDataProvider>
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
@@ -23,9 +28,14 @@ export default function App() {
         <Route path="/he-cua/nhom-kinh" element={<HeCua type="nhom-kinh" />} />
         <Route path="/noi-that-aplus" element={<HeCua type="noi-that" />} />
         <Route path="/khoa-phu-kien" element={<HeCua type="khoa-phu-kien" />} />
+        <Route path="/san-pham/:slug" element={<ProductDetail />} />
         <Route path="/tin-tuc" element={<TinTuc />} />
+        <Route path="/tin-tuc/:slug" element={<NewsDetail />} />
+        <Route path="/thong-tin-hop-tac/:slug" element={<NewsDetail />} />
         <Route path="/lien-he" element={<LienHe />} />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </BrowserRouter>
+    </SiteDataProvider>
   );
 }

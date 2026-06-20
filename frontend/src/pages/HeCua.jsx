@@ -1,11 +1,14 @@
 // frontend/src/pages/HeCua.jsx
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { compositeData, fireproofData, aluminumData } from '../data/mockData';
+import { useSiteData } from '../context/SiteDataContext';
+import { slugify } from '../utils/slug';
 
 export default function HeCua({ type }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const { compositeData, fireproofData, aluminumData } = useSiteData();
   const isTopLevelSection = !type || type === 'noi-that' || type === 'khoa-phu-kien';
   const isSpecialOverview = false;
   const pageTitle = 'HỆ CỬA APLUS';
@@ -86,12 +89,12 @@ export default function HeCua({ type }) {
         <Header />
         <main className="flex-grow">
           {/* BANNER */}
-          <section
-            className="relative h-[280px] bg-cover bg-center flex items-center justify-center text-white"
-            style={{ backgroundImage: `url('${topLevelData.bannerImg}')` }}
-          >
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
-            <h1 className="relative z-10 text-4xl md:text-5xl font-black tracking-widest uppercase text-white border-b-4 border-white/20 pb-2">{pageTitle}</h1>
+          <section className="w-full overflow-hidden bg-white">
+            <img
+              src={topLevelData.bannerImg}
+              alt={pageTitle}
+              className="block w-full h-auto"
+            />
           </section>
 
           {/* VỀ CHÚNG TÔI */}
@@ -531,7 +534,7 @@ export default function HeCua({ type }) {
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {visibleProducts.map((product, productIndex) => (
-                <div key={`${product.title}-${product.code || productIndex}`} className="group cursor-pointer space-y-3">
+                <Link key={`${product.title}-${product.code || productIndex}`} to={`/san-pham/${slugify(product.slug || product.code || product.title)}`} className="group cursor-pointer space-y-3 block">
                   {/* Khung ảnh bo góc sâu chuẩn thiết kế */}
                   <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-50">
                     <img
@@ -545,7 +548,7 @@ export default function HeCua({ type }) {
                     {product.code && <span className="block font-black text-gray-900 text-sm tracking-wide">{product.code}</span>}
                     <span className="block text-xs font-bold text-gray-500 mt-0.5">{product.title}</span>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 

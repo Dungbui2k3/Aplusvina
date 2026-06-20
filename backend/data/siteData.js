@@ -1,6 +1,6 @@
 // frontend/src/data/mockData.js
 
-export const navigation = {
+const navigation = {
   menu: [
     { name: "TRANG CHỦ", link: "/" },
     { name: "GIỚI THIỆU", link: "/gioi-thieu" },
@@ -51,14 +51,14 @@ export const navigation = {
 };
 
 // 1. Slider Banner chính
-export const homeSliders = [
+const homeSliders = [
   { img: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 1.png", title: "KHÔNG GIAN SỐNG ĐẲNG CẤP", sub: "KIẾN TẠO KIỆT TÁC KHÔNG GIAN CÙNG APLUS" },
   { img: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 2.png", title: "HỆ CỬA CAO CẤP APLUS", sub: "AN TOÀN - BỀN BỈ - SANG TRỌNG THEO THỜI GIAN" },
   { img: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 3.png", title: "NỘI THẤT TINH TẾ & KHÁC BIỆT", sub: "ĐỊNH HÌNH PHONG CÁCH SỐNG THƯỢNG LƯU" }
 ];
 
 // 2. Khối giới thiệu Aplus Group
-export const homeIntroData = {
+const homeIntroData = {
   subtitle: "GIỚI THIỆU",
   title: "VỀ APLUS GROUP",
   description: "Aplus Group tự hào là đơn vị tiên phong kiến tạo những giải pháp toàn diện về hệ cửa cao cấp và thiết kế thi công nội thất di sản. Với tôn chỉ chú trọng vào đường nét tinh giản, tỷ lệ cân đối và chất liệu vượt trội, chúng tôi đồng hành cùng khách hàng để hiện thực hóa những không gian sống thượng lưu, mang đậm bản sắc cá nhân và giá trị nghệ thuật bền vững theo thời gian.",
@@ -66,7 +66,7 @@ export const homeIntroData = {
 };
 
 // 3. Đầy đủ 5 lĩnh vực đầu tư trên trang chủ
-export const sectors = [
+const sectors = [
   { id: "01", name: "HỆ CỬA APLUS", img: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 4.png", link: "/he-cua" },
   { id: "02", name: "THIẾT KẾ NỘI THẤT", img: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 5.png", link: "/noi-that-aplus" },
   { id: "03", name: "KHÓA & PHỤ KIỆN", img: "/ảnh web vina/ảnh trang chủ/ảnh trang chủ 6.png", link: "/khoa-phu-kien" },
@@ -75,7 +75,7 @@ export const sectors = [
 ];
 
 // 4. Dự án tiêu biểu
-export const projects = [
+const projects = [
   { title: "KHÁCH SẠN 5 SAO MIKAZUKI – ĐÀ NẴNG", img: "/ảnh web vina/ảnh trang chủ/dự án 1.jpg" },
   { title: "BRG COASTAL CITY ĐỒ SƠN", img: "/ảnh web vina/ảnh trang chủ/dự án 2.jpg" },
   { title: "CHUNG CƯ BAN CƠ YẾU CHÍNH PHỦ", img: "/ảnh web vina/ảnh trang chủ/dự án 3.jpg" },
@@ -84,14 +84,14 @@ export const projects = [
 ];
 
 // 5. Tin tức sự kiện
-export const news = [
+const news = [
   { date: "12", month: "Th4", title: "Khu nghỉ dưỡng crimson bay", desc: "Best windows & doors installation service in the USA. Suspendisse aliquam mi et mi sagittis, [...]", img: "/ảnh web vina/ảnh trang chủ/tin tức 4.png" },
   { date: "11", month: "Th4", title: "Aplus Group mở rộng hoạt động sang thị trường quốc tế", desc: "This guide offers smart, practical tips to help first-time travelers explore with confidence, stay safe, [...]", img: "/ảnh web vina/ảnh trang chủ/tin tức 2.png" },
   { date: "19", month: "Th11", title: "Aplus Group hợp tác với đối tác chiến lược Nhật Bản", desc: "This guide offers smart, practical tips to help first-time travelers explore with confidence, stay safe, [...]", img: "/ảnh web vina/ảnh trang chủ/tin tức 1.png" },
   { date: "13", month: "Th10", title: "Hội nghị xúc tiến đầu tư Aplus Group năm 2024 thành công tốt đẹp", desc: "This guide offers smart, practical tips to help first-time travelers explore with confidence, stay safe, [...]", img: "/ảnh web vina/ảnh trang chủ/tin tức 3.png" }
 ];
 
-export const newsCategories = [
+const newsCategories = [
   "Công Ty Thành Viên",
   "Thông Tin Hợp Tác",
   "Tin Aplus Group",
@@ -99,10 +99,10 @@ export const newsCategories = [
   "Aplus Door"
 ];
 
-export const newsKeywords = ["brooklyn", "fashion", "style", "women"];
+const newsKeywords = ["brooklyn", "fashion", "style", "women"];
 
 // 6. Đánh giá từ khách hàng
-export const testimonials = [
+const testimonials = [
   { 
     name: "Nguyễn Hải Đăng", 
     address: "Hưng Yên", 
@@ -140,7 +140,7 @@ export const testimonials = [
   }
 ];
 
-export const compositeData = {
+const compositeData = {
   title: "CỬA COMPOSITE",
   subtitle: "ĐẲNG CẤP CHẤT LƯỢNG, TIÊU CHUẨN VƯỢT TRỘI",
   description: "APLUS COMPOSITE không chỉ cung cấp giải pháp cửa, chúng tôi kiến tạo những giá trị bền vững cho không gian sống. Với định hình hướng phát triển theo tiêu chuẩn cao cấp, APLUS COMPOSITE mang đến các bộ cửa chất lượng, kết hợp hoàn hảo giữa đẹp bền vì với độ tin an toàn và thẩm mỹ liệt cung quy trình thi công, lắp đặt chuyên nghiệp, chính xác.",
@@ -163,7 +163,7 @@ export const compositeData = {
   ]
 };
 
-export const fireproofData = {
+const fireproofData = {
   title: "CỬA GỖ CHỐNG CHÁY",
   subtitle: "SỰ KẾT HỢP HOÀN HẢO, PHÙ HỢP CHO CÔNG TRÌNH YÊU CẦU CAO",
   description: "APLUS DOOR không chỉ cung cấp giải pháp cửa, chúng tôi kiến tạo những giá trị bền vững cho không gian sống. Với định hình hướng phát triển theo tiêu chuẩn cao cấp, APLUS DOOR mang đến các bộ cửa chất lượng, kết hợp hoàn hảo giữa đẹp bền và độ tin an toàn. Sự chỉn chu trong từng chi tiết cung quy trình thi công, lắp đặt chuyên nghiệp, chính xác.",
@@ -185,7 +185,7 @@ export const fireproofData = {
   ]
 };
 
-export const aluminumData = {
+const aluminumData = {
   title: "CỬA NHÔM KÍNH",
   subtitle: "THIẾT KẾ HIỆN ĐẠI, MỞ RỘNG KHÔNG GIAN PHÙ HỢP",
   description: "APLUS NHÔM KÍNH không chỉ cung cấp giải pháp cửa, chúng tôi kiến tạo những giá trị bền vững cho không gian sống. Với định hình hướng phát triển theo tiêu chuẩn cao cấp, APLUS NHÔM KÍNH mang đến các bộ cửa chất lượng, kết hợp hoàn hảo giữa tính ứng dụng thực tế với thẩm mỹ hiện đại. Sự chỉn chu trong từng chi tiết cung quy trình thi công, lắp đặt chuyên nghiệp, chính xác.",
@@ -204,7 +204,7 @@ export const aluminumData = {
   ]
 };
 
-export const introPageData = {
+const introPageData = {
   bannerImg: "/ảnh web vina/ảnh giới thiệu/giới thiệu 1.jpg", 
   coreValues: [
     { title: "CHIẾN LƯỢC", desc: "Theo duh thiết kế tinh giản, giàu chiều sâu..." },
@@ -218,4 +218,21 @@ export const introPageData = {
     { title: "BRG COASTAL CITY ĐỒ SƠN", img: "/ảnh web vina/ảnh trang chủ/dự án 2.jpg" },
     { title: "CHUNG CƯ BAN CƠ YẾU CHÍNH PHỦ", img: "/ảnh web vina/ảnh trang chủ/dự án 3.jpg" }
   ]
+};
+
+
+module.exports = {
+  navigation,
+  homeSliders,
+  homeIntroData,
+  sectors,
+  projects,
+  news,
+  newsCategories,
+  newsKeywords,
+  testimonials,
+  compositeData,
+  fireproofData,
+  aluminumData,
+  introPageData
 };

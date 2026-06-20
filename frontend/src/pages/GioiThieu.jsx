@@ -1,10 +1,13 @@
 // frontend/src/pages/GioiThieu.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { introPageData } from '../data/mockData';
+import { useSiteData } from '../context/SiteDataContext';
 
 export default function GioiThieu() {
+  const { introPageData = { coreValues: [], featuredProjects: [] } } = useSiteData();
+
   return (
     <div className="bg-white text-gray-800 min-h-screen flex flex-col justify-between">
       {/* HEADER CỐ ĐỊNH */}
@@ -54,9 +57,9 @@ export default function GioiThieu() {
             </div>
 
             <div className="flex flex-wrap items-center gap-4 pt-4">
-              <button className="bg-red-600 text-white text-sm md:text-base font-bold px-8 py-4 rounded-xl hover:bg-red-700 shadow-md shadow-red-600/10 cursor-pointer uppercase tracking-wider">
+              <Link to="/lien-he" className="bg-red-600 text-white text-sm md:text-base font-bold px-8 py-4 rounded-xl hover:bg-red-700 shadow-md shadow-red-600/10 cursor-pointer uppercase tracking-wider">
                 Tư vấn ngay ›
-              </button>
+              </Link>
               <div className="flex items-center gap-3 border border-gray-200/60 rounded-xl px-5 py-2.5 bg-gray-50/50">
                 <span className="text-red-600 text-base">📞</span>
                 <div>

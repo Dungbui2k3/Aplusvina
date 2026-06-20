@@ -1,10 +1,11 @@
 // frontend/src/components/Header.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { navigation } from '../data/mockData';
+import { useSiteData } from '../context/SiteDataContext';
 
 export default function Header() {
   const [dropdown, setDropdown] = useState(null);
+  const { navigation } = useSiteData();
 
   const closeDropdown = () => {
     setDropdown(null);
@@ -21,7 +22,7 @@ export default function Header() {
         
         {/* MENU CHÍNH */}
         <nav className="hidden lg:flex space-x-6 text-xs font-bold h-full items-center">
-          {navigation.menu.map((item, idx) => (
+          {(navigation?.menu || []).map((item, idx) => (
             <div
               key={idx}
               className="relative h-full flex items-center py-2"

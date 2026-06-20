@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { testimonials } from '../data/mockData';
+import { useSiteData } from '../context/SiteDataContext';
 
 const partnerLogos = [
   "/ảnh web vina/ảnh trang chủ/đối tác 1.png",
@@ -14,14 +14,16 @@ const marqueeItems = [...partnerLogos, ...partnerLogos, ...partnerLogos, ...part
 
 export default function NhanTuVan() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { testimonials = [] } = useSiteData();
 
   // Auto-play interval that clears and resets when currentSlide changes
   useEffect(() => {
+    if (!testimonials.length) return undefined;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [currentSlide]);
+  }, [currentSlide, testimonials.length]);
 
   const goToSlide = (idx) => {
     setCurrentSlide(idx);

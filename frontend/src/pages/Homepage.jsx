@@ -4,17 +4,19 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import NhanTuVan from '../components/NhanTuVan';
-import { homeSliders, homeIntroData, sectors, projects, news } from '../data/mockData';
+import { useSiteData } from '../context/SiteDataContext';
 
 export default function Homepage() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { homeSliders = [], sectors = [], projects = [], news = [] } = useSiteData();
 
   useEffect(() => {
+    if (!homeSliders.length) return undefined;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % homeSliders.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [homeSliders.length]);
 
   return (
     <div className="bg-[#FAF9F6] text-gray-800 min-h-screen font-sans flex flex-col justify-between overflow-x-hidden">
@@ -87,7 +89,7 @@ export default function Homepage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-4 pt-4">
-              <Link to="/gioi-thieu" className="bg-red-600 text-white text-xs md:text-sm font-bold px-8 py-4 rounded-xl hover:bg-red-700 shadow-md shadow-red-600/10 cursor-pointer uppercase tracking-wider flex items-center justify-center transition-colors">
+              <Link to="/lien-he" className="bg-red-600 text-white text-xs md:text-sm font-bold px-8 py-4 rounded-xl hover:bg-red-700 shadow-md shadow-red-600/10 cursor-pointer uppercase tracking-wider flex items-center justify-center transition-colors">
                 Tư vấn ngay ›
               </Link>
               <div className="flex items-center gap-3 border border-gray-200/60 rounded-xl px-5 py-2.5 bg-gray-50/50">
@@ -164,10 +166,10 @@ export default function Homepage() {
             <div className="grid gap-6 lg:grid-cols-[1.45fr_1fr]">
               <div className="rounded-[28px] overflow-hidden bg-white shadow-2xl shadow-black/20">
                 <div className="relative h-[420px] overflow-hidden bg-black">
-                  <img src={projects[0].img} alt={projects[0].title} className="w-full h-full object-contain" />
+                  <img src={projects[0]?.img} alt={projects[0]?.title} className="w-full h-full object-contain" />
                 </div>
                 <div className="p-6 bg-zinc-950 border-t border-zinc-800">
-                  <h3 className="text-xl md:text-2xl font-black uppercase tracking-wide text-white">{projects[0].title}</h3>
+                  <h3 className="text-xl md:text-2xl font-black uppercase tracking-wide text-white">{projects[0]?.title}</h3>
                   <button className="mt-5 inline-flex items-center gap-2 rounded-full bg-red-600 px-5 py-3 text-sm md:text-base font-black uppercase tracking-[0.2em] text-white hover:bg-red-700 transition">
                     XEM THÊM
                     <span>→</span>
