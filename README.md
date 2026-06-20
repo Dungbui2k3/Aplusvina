@@ -1,5 +1,9 @@
 # Aplus Project
 
+## Yêu cầu
+
+Nên dùng Node.js `22.13+` hoặc `20.19+`.
+
 ## Cài đặt lần đầu
 
 Chạy tại thư mục gốc của dự án:
