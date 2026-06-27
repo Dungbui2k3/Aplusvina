@@ -147,13 +147,13 @@ export default function Homepage() {
         <section className="w-full bg-white">
           <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr]">
             {/* Bảng đỏ bên trái */}
-            <div className="bg-red-700 text-white px-8 py-12 flex flex-col justify-between text-right">
+            <div className="bg-red-700 text-white px-8 py-12 flex flex-col justify-between text-left">
               <div>
                 <p className="text-2xl md:text-3xl font-light tracking-wide">LĨNH VỰC</p>
                 <h2 className="mt-1 text-3xl md:text-4xl font-black uppercase tracking-wide">ĐẦU TƯ</h2>
                 <p className="mt-5 text-sm font-bold tracking-[0.25em] text-white/90">APLUS GROUP/</p>
               </div>
-              <div className="mt-12 flex items-center justify-end gap-3">
+              <div className="mt-12 flex items-center justify-start gap-3">
                 <span className="text-[#E6B450] text-sm font-bold leading-tight">
                   Xem toàn bộ<br />lĩnh vực
                 </span>
