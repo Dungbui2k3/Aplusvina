@@ -3,12 +3,44 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import NhanTuVan from '../components/NhanTuVan';
 import { useSiteData } from '../context/SiteDataContext';
+import { slugify } from '../utils/slug';
+
+// Danh mục tab cho phần Dự án
+const PROJECT_TABS = [
+  'TỔ HỢP KHU CHUNG CƯ VĂN PHÒNG',
+  'QUẦN THỂ DU LỊCH, NGHỈ DƯỠNG',
+  'HÀNG KHÔNG',
+  'KHU CÔNG NGHIỆP CÔNG NGHỆ CAO',
+];
+
+// Menu danh mục cho phần Tin tức
+const NEWS_MENU = [
+  'TIN ANPLUS GROUP',
+  'CÔNG TY THÀNH VIÊN',
+  'THÔNG TIN BÁO CHÍ',
+  'THÔNG TIN HỢP TÁC',
+];
 
 export default function Homepage() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { homeSliders = [], sectors = [], projects = [], news = [] } = useSiteData();
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const {
+    homeSliders = [],
+    sectors = [],
+    projects = [],
+    news = [],
+    testimonials = [],
+  } = useSiteData();
+
+  // Logo đối tác (dải băng đỏ chạy) - lặp lại để tạo hiệu ứng vô tận
+  const partnerLogos = [
+    '/ảnh web vina/logo header.png',
+    '/ảnh web vina/ảnh trang chủ/đối tác 1.png',
+    '/ảnh web vina/ảnh trang chủ/đối tác 2.png',
+    '/ảnh web vina/ảnh trang chủ/đối tác 3.png',
+    '/ảnh web vina/ảnh trang chủ/đối tác 4.png',
+  ];
 
   useEffect(() => {
     if (!homeSliders.length) return undefined;
@@ -18,8 +50,16 @@ export default function Homepage() {
     return () => clearInterval(timer);
   }, [homeSliders.length]);
 
+  useEffect(() => {
+    if (!testimonials.length) return undefined;
+    const timer = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
   return (
-    <div className="bg-[#FAF9F6] text-gray-800 min-h-screen font-sans flex flex-col justify-between overflow-x-hidden">
+    <div className="bg-[#FAF9F6] text-gray-800 min-h-screen font-sans flex flex-col justify-between overflow-x-clip">
       
       {/* --- HEADER --- */}
       <Header />
@@ -104,46 +144,38 @@ export default function Homepage() {
         </section>
 
         {/* 3. LĨNH VỰC ĐẦU TƯ */}
-        <section className="container mx-auto px-4 py-20">
-          <div className="grid grid-cols-1 xl:grid-cols-[360px_1fr] gap-8">
-            <div className="rounded-[32px] bg-red-700 text-white p-12 flex flex-col justify-between shadow-2xl shadow-red-500/10">
+        <section className="w-full bg-white">
+          <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr]">
+            {/* Bảng đỏ bên trái */}
+            <div className="bg-red-700 text-white px-8 py-12 flex flex-col justify-between text-right">
               <div>
-                <p className="text-sm md:text-base font-semibold uppercase tracking-[0.35em] text-red-200/80">
-                  LĨNH VỰC
-                </p>
-                <h2 className="mt-6 text-5xl md:text-6xl font-black uppercase tracking-tight leading-tight">
-                  ĐẦU TƯ
-                </h2>
-                <p className="mt-4 text-base md:text-lg leading-relaxed text-red-100/90">
-                  APlus Group mang đến giải pháp toàn diện cho hệ cửa, nội thất, khóa phụ kiện, âm thanh cao cấp và thiết kế bida đẳng cấp.
-                </p>
+                <p className="text-2xl md:text-3xl font-light tracking-wide">LĨNH VỰC</p>
+                <h2 className="mt-1 text-3xl md:text-4xl font-black uppercase tracking-wide">ĐẦU TƯ</h2>
+                <p className="mt-5 text-sm font-bold tracking-[0.25em] text-white/90">APLUS GROUP/</p>
               </div>
-              <div className="mt-10">
-                <span className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.3em] font-bold text-red-100/80">
-                  Xem toàn bộ lĩnh vực
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14"></path>
-                    <path d="m13 18 6-6-6-6"></path>
-                  </svg>
+              <div className="mt-12 flex items-center justify-end gap-3">
+                <span className="text-[#E6B450] text-sm font-bold leading-tight">
+                  Xem toàn bộ<br />lĩnh vực
                 </span>
+                <span className="h-[2px] w-14 bg-[#E6B450]"></span>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-5">
+            {/* 5 thẻ lĩnh vực tràn viền */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
               {sectors.map((sec) => (
-                <Link key={sec.id} to={sec.link} className="group overflow-hidden rounded-[32px] shadow-2xl border border-gray-200/20 bg-white">
-                  <div className="relative h-[560px] overflow-hidden">
-                    <img src={sec.img} alt={sec.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/70">Lĩnh vực</span>
-                      <h3 className="mt-3 text-lg md:text-xl font-black uppercase tracking-[0.06em] text-white leading-tight whitespace-nowrap overflow-hidden">
-                        {sec.name}
-                      </h3>
-                      <button className="mt-5 rounded-full bg-red-600 px-5 py-2 text-xs md:text-sm font-black uppercase tracking-[0.25em] text-white transition hover:bg-red-700 whitespace-nowrap">
-                        XEM THÊM
-                      </button>
-                    </div>
+                <Link key={sec.id} to={sec.link} className="group relative h-[460px] lg:h-[820px] overflow-hidden">
+                  <img src={sec.img} alt={sec.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+                  <div className="absolute bottom-8 left-6 right-6">
+                    <span className="text-[#E6B450] text-lg font-black">{sec.id}</span>
+                    <p className="mt-1.5 text-[10px] uppercase tracking-[0.2em] text-white/80">Lĩnh vực</p>
+                    <h3 className="mt-1 text-base lg:text-lg font-black uppercase tracking-wide text-white leading-tight">
+                      {sec.name}
+                    </h3>
+                    <span className="mt-4 inline-block bg-red-600 px-5 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-white transition group-hover:bg-red-700">
+                      XEM THÊM
+                    </span>
                   </div>
                 </Link>
               ))}
@@ -151,43 +183,68 @@ export default function Homepage() {
           </div>
         </section>
 
-        <section className="py-16 bg-zinc-900 text-white border-t border-zinc-800">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
-              <div className="space-y-1">
-                <span className="text-sm md:text-base font-bold text-red-500 font-mono tracking-widest block">DỰ ÁN /</span>
-                <h2 className="text-3xl md:text-4xl font-black tracking-wider uppercase">A+PLUS GROUP</h2>
+        {/* 4. DỰ ÁN */}
+        <section className="relative w-full bg-white overflow-hidden">
+          {/* Tam giác đỏ ngược nối tiếp từ phần Lĩnh vực, kết thúc ở cuối phần Dự án */}
+          <div
+            aria-hidden
+            className="absolute inset-y-0 left-0 w-[85%] md:w-[50%] bg-red-700 z-0"
+            style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}
+          ></div>
+
+          <div className="relative z-10">
+            {/* Tiêu đề + tab danh mục */}
+            <div className="flex flex-col md:flex-row md:items-center gap-5 md:gap-10 pt-12 pb-10 pl-6 md:pl-12 pr-6">
+              <div className="text-white shrink-0">
+                <h2 className="text-3xl md:text-4xl font-black uppercase tracking-wide">DỰ ÁN</h2>
+                <p className="mt-1 text-xs font-bold tracking-[0.25em] text-white/90">APLUS GROUP/</p>
               </div>
-              <div className="text-xs md:text-sm font-semibold uppercase tracking-[0.28em] text-gray-400 max-w-2xl">
-                TỔ HỢP KHU CHUNG CƯ VĂN PHÒNG / QUẦN THỂ DU LỊCH, NGHỈ DƯỠNG / HÀN KHÔNG / KHU CÔNG NGHIỆP CÔNG NGHỆ CAO
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] md:text-xs font-bold uppercase tracking-wider md:ml-auto md:max-w-[46%]">
+                {PROJECT_TABS.map((tab, idx) => (
+                  <React.Fragment key={tab}>
+                    {idx > 0 && <span className="text-gray-300">/</span>}
+                    <span className={idx === 0 ? 'text-red-600 cursor-pointer' : 'text-gray-500 hover:text-red-600 cursor-pointer transition-colors'}>
+                      {tab}
+                    </span>
+                  </React.Fragment>
+                ))}
               </div>
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-[1.45fr_1fr]">
-              <div className="rounded-[28px] overflow-hidden bg-white shadow-2xl shadow-black/20">
-                <div className="relative h-[420px] overflow-hidden bg-black">
-                  <img src={projects[0]?.img} alt={projects[0]?.title} className="w-full h-full object-contain" />
-                </div>
-                <div className="p-6 bg-zinc-950 border-t border-zinc-800">
-                  <h3 className="text-xl md:text-2xl font-black uppercase tracking-wide text-white">{projects[0]?.title}</h3>
-                  <button className="mt-5 inline-flex items-center gap-2 rounded-full bg-red-600 px-5 py-3 text-sm md:text-base font-black uppercase tracking-[0.2em] text-white hover:bg-red-700 transition">
+            {/* Lưới dự án: 1 nổi bật + 4 thẻ — cách lề chút để lộ viền đỏ */}
+            <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] pl-5 md:pl-12 pr-5 md:pr-10 pb-28">
+              {/* Dự án nổi bật */}
+              <div className="flex flex-col">
+                <Link to={projects[0] ? `/project/${slugify(projects[0].title)}` : '#'} className="group relative h-[360px] lg:h-[520px] overflow-hidden rounded-sm bg-gray-100 shadow-sm block">
+                  <img src={projects[0]?.img} alt={projects[0]?.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <img src="/ảnh web vina/logo header.png" alt="APlus" className="absolute top-5 right-5 h-7 w-auto object-contain opacity-90" />
+                </Link>
+                {/* Dải chữ nền trắng nằm trên nền đỏ */}
+                <div className="flex items-center justify-between gap-4 bg-white px-4 md:px-6 py-5 rounded-b-sm">
+                  <Link to={projects[0] ? `/project/${slugify(projects[0].title)}` : '#'} className="text-base md:text-xl font-black uppercase tracking-wide text-gray-900 leading-snug hover:text-red-600 transition-colors">
+                    {projects[0]?.title}
+                  </Link>
+                  <Link to={projects[0] ? `/project/${slugify(projects[0].title)}` : '#'} className="shrink-0 bg-red-600 text-white text-[11px] md:text-xs font-black uppercase tracking-widest px-6 py-3 rounded-md hover:bg-red-700 transition">
                     XEM THÊM
-                    <span>→</span>
-                  </button>
+                  </Link>
                 </div>
               </div>
 
+              {/* 4 thẻ dự án */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {projects.slice(1, 5).map((project, idx) => (
-                  <div key={idx} className="group overflow-hidden rounded-[28px] bg-white shadow-xl shadow-black/20 border border-gray-200">
-                    <div className="relative h-48 overflow-hidden bg-black">
-                      <img src={project.img} alt={project.title} className="w-full h-full object-contain" />
-                    </div>
-                    <div className="p-4 bg-zinc-950">
-                      <h4 className="text-sm md:text-base font-black uppercase tracking-[0.2em] text-white leading-tight">{project.title}</h4>
-                      <span className="mt-3 inline-flex items-center gap-1 text-xs md:text-sm font-bold uppercase tracking-[0.25em] text-red-500">
+                  <div key={idx} className="group flex flex-col bg-white rounded-sm shadow-md border border-gray-100 overflow-hidden">
+                    <Link to={`/project/${slugify(project.title)}`} className="relative h-40 lg:h-48 overflow-hidden bg-gray-100 block">
+                      <img src={project.img} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    </Link>
+                    <div className="relative p-4 pb-5">
+                      <Link to={`/project/${slugify(project.title)}`} className="block text-sm font-black uppercase tracking-wide text-gray-900 leading-snug pr-12 hover:text-red-600 transition-colors">
+                        {project.title}
+                      </Link>
+                      <Link to={`/project/${slugify(project.title)}`} className="mt-3 inline-block bg-red-600 text-white text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-md hover:bg-red-700 transition">
                         XEM THÊM
-                      </span>
+                      </Link>
+                      <img src="/ảnh web vina/logo header.png" alt="APlus" className="absolute bottom-4 right-4 h-5 w-auto object-contain opacity-80" />
                     </div>
                   </div>
                 ))}
@@ -196,46 +253,142 @@ export default function Homepage() {
           </div>
         </section>
 
-        {/* 5. TIN TỨC & SỰ KIỆN */}
-        
-                 <section className="container mx-auto px-4 max-w-[1360px] py-20">
-          <div className="text-center max-w-2xl mx-auto mb-14 space-y-1">
-            <span className="text-xs md:text-sm font-bold text-red-600 tracking-widest block">JOURNAL</span>
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-wide uppercase">TIN TỨC & SỰ KIỆN</h2>
-            <div className="w-12 h-1 bg-red-600 mx-auto mt-2"></div>
+        {/* 5. KHÁCH HÀNG */}
+        <section className="w-full bg-white pt-16 pb-10 overflow-hidden">
+          <div className="container mx-auto px-4">
+            <div className="mb-10">
+              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-wide text-red-600">KHÁCH HÀNG</h2>
+              <p className="mt-2 text-sm font-bold tracking-[0.2em] text-gray-700 ml-1">APLUS GROUP/</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {news.map((n, idx) => (
-              <div key={idx} className="flex flex-col sm:flex-row gap-5 bg-white p-3.5 shadow-sm group cursor-pointer border border-gray-100 rounded-2xl hover:shadow-md transition-shadow">
-                <div className="w-full sm:w-5/12 aspect-[4/3] overflow-hidden bg-gray-50 flex-shrink-0 relative rounded-xl">
-                  <img src={n.img} alt={n.title} className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" />
-                </div>
-                <div className="flex flex-col justify-between py-1">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-red-600 uppercase font-mono">
-                      <span>{n.date}</span>
-                      <span className="text-gray-300">/</span>
-                      <span className="text-gray-400">{n.month}</span>
+          {/* Carousel đánh giá — tràn sát lề, nổi rõ thẻ giữa */}
+          <div className="relative w-full">
+            {/* Nút điều hướng */}
+            <button
+              type="button"
+              onClick={() => setActiveTestimonial((p) => (p - 1 + testimonials.length) % testimonials.length)}
+              className="absolute left-3 md:left-8 top-1/2 -translate-y-1/2 z-30 h-11 w-11 rounded-full bg-white/90 text-red-600 shadow-lg flex items-center justify-center hover:bg-red-600 hover:text-white transition"
+              aria-label="Đánh giá trước"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTestimonial((p) => (p + 1) % testimonials.length)}
+              className="absolute right-3 md:right-8 top-1/2 -translate-y-1/2 z-30 h-11 w-11 rounded-full bg-white/90 text-red-600 shadow-lg flex items-center justify-center hover:bg-red-600 hover:text-white transition"
+              aria-label="Đánh giá tiếp theo"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+            </button>
+
+            <div className="flex items-center justify-center gap-4 md:gap-5">
+              {(() => {
+                const n = testimonials.length;
+                if (!n) return null;
+                const slots = [-2, -1, 0, 1, 2];
+                const variants = ['edge', 'side', 'active', 'side', 'edge'];
+                return slots.map((d, i) => {
+                  const t = testimonials[(activeTestimonial + d + n * 2) % n];
+                  const variant = variants[i];
+                  const sizeClass =
+                    variant === 'active'
+                      ? 'w-[80%] sm:w-[46%] lg:w-[40%] h-[360px] opacity-100 z-20 shadow-2xl'
+                      : variant === 'side'
+                      ? 'hidden sm:block w-[27%] lg:w-[24%] h-[300px] opacity-60'
+                      : 'hidden lg:block w-[18%] h-[280px] opacity-40';
+                  return (
+                    <div
+                      key={i}
+                      onClick={() => variant !== 'active' && setActiveTestimonial((activeTestimonial + d + n * 2) % n)}
+                      className={`relative shrink-0 self-center rounded-2xl overflow-hidden transition-all duration-500 ${variant !== 'active' ? 'cursor-pointer' : ''} ${sizeClass}`}
+                    >
+                      <img src={t.projectImg} alt={t.name} className="absolute inset-0 w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/45" />
+                      <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-center text-white">
+                        <div className="flex items-center gap-4">
+                          <img src={t.img} alt={t.name} className="h-14 w-14 rounded-full object-cover border-2 border-white/70 shrink-0" />
+                          <div className="text-[#E6B450] text-base tracking-widest">★★★★★</div>
+                        </div>
+                        <p className="mt-4 text-sm md:text-base italic leading-relaxed line-clamp-4">
+                          {t.comment}
+                        </p>
+                        <p className="mt-4 font-black tracking-wide">
+                          {t.name} <span className="font-medium text-white/80">/ {t.address}</span>
+                        </p>
+                      </div>
                     </div>
-                    <h3 className="font-black text-sm md:text-base uppercase text-gray-900 line-clamp-2 tracking-wide group-hover:text-red-600 transition-colors">
-                      {n.title}
-                    </h3>
-                    <p className="text-gray-500 text-xs md:text-sm leading-relaxed line-clamp-2">
-                      {n.desc}
-                    </p>
-                  </div>
-                  <span className="text-xs font-bold text-gray-900 uppercase tracking-widest border-b-2 border-gray-900 w-max pt-1 group-hover:text-red-600 group-hover:border-red-600 transition-colors">
-                    Đọc tiếp
-                  </span>
-                </div>
-              </div>
+                  );
+                });
+              })()}
+            </div>
+          </div>
+
+          {/* Chấm phân trang */}
+          <div className="flex justify-center gap-2 mt-8">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveTestimonial(idx)}
+                className={`h-2 rounded-full transition-all ${idx === activeTestimonial ? 'bg-red-600 w-6' : 'bg-gray-300 w-2'}`}
+                aria-label={`Xem đánh giá ${idx + 1}`}
+              ></button>
             ))}
+          </div>
+
+          {/* Dải băng logo đối tác chạy */}
+          <div className="mt-12 bg-red-600 py-5 overflow-hidden">
+            <div className="flex items-center gap-4 w-max animate-[aplus-marquee_28s_linear_infinite]">
+              {[...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos].map((logo, idx) => (
+                <div key={idx} className="bg-white rounded-md h-16 w-40 flex items-center justify-center px-5 shrink-0">
+                  <img src={logo} alt="Đối tác" className="max-h-9 max-w-full object-contain" />
+                </div>
+              ))}
+            </div>
+          </div>
+          <style>{`@keyframes aplus-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
+        </section>
+
+        {/* 6. TIN TỨC */}
+        <section className="container mx-auto px-4 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[230px_1fr] gap-10">
+            {/* Sidebar */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-wide text-red-600">TIN TỨC</h2>
+              <p className="mt-2 text-sm font-bold tracking-[0.2em] text-gray-700 ml-1">APLUS GROUP/</p>
+              <ul className="mt-8 space-y-4">
+                {NEWS_MENU.map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-gray-800 hover:text-red-600 cursor-pointer transition-colors">
+                    <span className="text-red-600 text-xs">●</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 4 thẻ tin tức */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+              {news.map((n, idx) => (
+                <Link key={idx} to="/tin-tuc" className="group flex flex-col">
+                  <div className="relative h-44 overflow-hidden rounded-md bg-gray-100">
+                    <img src={n.img} alt={n.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div className="absolute top-3 left-3 bg-white rounded-sm border border-red-600 text-center px-2.5 py-1.5 shadow-sm">
+                      <span className="block text-lg font-black leading-none text-gray-900">{n.date}</span>
+                      <span className="block text-[10px] font-bold text-red-600">{n.month}</span>
+                    </div>
+                  </div>
+                  <h3 className="mt-4 text-sm md:text-[15px] font-black text-gray-900 leading-snug line-clamp-2 group-hover:text-red-600 transition-colors">
+                    {n.title}
+                  </h3>
+                  <p className="mt-2 text-xs md:text-sm text-gray-500 leading-relaxed line-clamp-3">
+                    {n.desc}
+                  </p>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* 6. NHÂN TƯ VẤN */}
-        <NhanTuVan />
       </main>
 
       {/* --- FOOTER --- */}

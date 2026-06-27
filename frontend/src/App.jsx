@@ -6,6 +6,7 @@ import GioiThieu from './pages/GioiThieu';
 import HeCua from './pages/HeCua';
 import TinTuc from './pages/TinTuc';
 import ProductDetail from './pages/ProductDetail';
+import ProjectDetail from './pages/ProjectDetail';
 import NewsDetail from './pages/NewsDetail';
 import LienHe from './pages/LienHe';
 import AdminDashboard from './pages/AdminDashboard';
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/noi-that-aplus" element={<HeCua type="noi-that" />} />
         <Route path="/khoa-phu-kien" element={<HeCua type="khoa-phu-kien" />} />
         <Route path="/san-pham/:slug" element={<ProductDetail />} />
+        <Route path="/project/:slug" element={<ProjectDetail />} />
         <Route path="/tin-tuc" element={<TinTuc />} />
         <Route path="/tin-tuc/:slug" element={<NewsDetail />} />
         <Route path="/thong-tin-hop-tac/:slug" element={<NewsDetail />} />
